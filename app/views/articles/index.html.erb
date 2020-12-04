@@ -1,13 +1,19 @@
 <html>
     <p>
-        <%@article.each do |art|%>
-        <%=art.title+" "%>
-        <%=art.description%>
-        <br>
+        <table>
+        <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Action</th>
+        </tr>
+        <%@articles.each do |article|%>
+        <tr>
+            <td><%=article.title%></td>
+            <td><%=article.description%></td>
+            <td>unknown</td>
+        </tr>
         <%end%>
-        
-        
-        
+        </table>
         
     
      </p>
