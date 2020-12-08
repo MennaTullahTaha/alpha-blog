@@ -5,6 +5,10 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end 
+
+  def show
+    @articles = @user.articles
+  end 
   
   def create
     @user = User.new(white_params_list)
