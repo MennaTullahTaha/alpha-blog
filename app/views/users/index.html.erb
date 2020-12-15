@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="flickr_pagination mb-4">
+    <%= will_paginate @users, :container => false %>
+  </div> 
   <% @users.each do |user| %>
     <div class="row justify-content-md-center">
       <div class="col-8 mt-4">
@@ -10,8 +13,11 @@
             <h5 class="card-title"><%= gravatar_for user, size: 200 %></h5>
             <p class="card-text"><%= pluralize(user.articles.count, "article") %></p>
             <%= link_to "View", user, class: "btn btn-outline-success" %>
-            <%= link_to "Edit", edit_user_path(user), class: "btn btn-outline-info" %>
-            <%= link_to "Delete", article_path(user), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            <%if logged_in? && current_user == user%>
+              <%= link_to "Edit", edit_user_path(user), class: "btn btn-outline-info" %>
+            <%elsif logged_in? && (current_user == user || current_user.admin?)%>
+              <%= link_to "Delete", user_path(user), class: "btn btn-outline-danger", method: :delete, data: {confirm: "Are you sure?"} %>
+            <%end%>
           </div>
           <div class="card-footer text-muted">
           </div>
@@ -19,4 +25,7 @@
       </div>
     </div>
   <% end %>
+  <div class="flickr_pagination mb-4">
+    <%= will_paginate @users, :container => false %>
+  </div> 
 </div> 
